@@ -1,4 +1,4 @@
-# Quasar App (teste-quasar)
+# Vehicles Management Front-End
 
 A Quasar Project
 
