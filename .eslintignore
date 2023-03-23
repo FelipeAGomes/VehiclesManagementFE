@@ -1,0 +1,13 @@
+/dist
+/src-capacitor
+/src-cordova
+/.quasar
+/node_modules
+.eslintrc.js
+/src-ssr
+/build/
+/config/
+/dist/
+/*.js
+/test/unit/coverage/
+*
