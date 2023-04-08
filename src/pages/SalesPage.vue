@@ -1,76 +1,35 @@
 <template>
     <div class="q-pa-md">
-        <q-table title="SALES" :rows="rows" :column="columns" row-key="name">
-            <template v-slot:header="props">
-                <q-tr :props="props">
-                    <q-th auto-width />
-                    <q-th v-for="col in props.cols" :key="col.name" :props="props">
-                        {{ col.label }}
-                    </q-th>
-                </q-tr>
-            </template>
-            <template v-slot:body="props">
-                <q-tr :props="props">
-                    <q-td auto-width>
-                        <q-btn size="sm" color="secondary" round dense @click="props.expand = !props.expand"
-                            :icon="props.expand ? 'remove' : 'add'" />
-                    </q-td>
-                    <q-td v-for="col in props.cols" :key="col.name" :props="props">
-                        {{ col.value }}
-                    </q-td>
-                </q-tr>
-                <q-tr v-show="props.expand" :props="props">
-                    <q-td colspan="100%">
-                        <div class="text-left">This is expand slot for row above: {{ props.row.name }}.</div>
-                    </q-td>
-                </q-tr>
-            </template>
+        <q-table title="SALES" :rows="sales" :columns="columns" row-key="name">
+
         </q-table>
     </div>
 </template>
     
 <script setup lang="ts">
-const columns = [
-    {
-        name: 'name',
-        required: true,
-        label: 'Model',
-        align: 'left',
-        field: (row: { name: string; }) => row.name,
-        format: (val: string) => `${val}`,
-        sortable: true
-    },
-    { name: 'brand', align: 'center', label: 'Brand', field: 'brand', sortable: true },
-    { name: 'costPrice', label: 'CostPrice', field: 'costPrice', sortable: true },
-    { name: 'extraCost', label: 'ExtraCost', field: 'extraCost' },
-    { name: 'totalCost', label: 'TotalCost', field: 'totalCost' },
-    { name: 'date', label: 'Date', field: 'date' },
-    { name: 'price', label: 'Price', field: 'price' },
-    { name: 'profit', align: 'left', label: 'Profit', field: 'profit' },
+import { LocalStorage, QTableColumn } from 'quasar';
+import { ISalesUser } from 'src/models/user/salesUser.type';
+import { ILoginUser } from 'src/models/user/loginUser.type';
+import salesService from 'src/services/sales/sales.service';
+import { onMounted } from 'vue';
 
+const user = LocalStorage.getItem('user') as ILoginUser;
+
+onMounted(async () => {
+    const sales = await salesService.salesUser(user.id);
+    LocalStorage.set('sales', sales[1]);
+});
+
+const sales = LocalStorage.getItem('sales') as ISalesUser[];
+console.log(sales)
+
+const columns: QTableColumn[] = [
+    {
+        name: 'vehicles', align: 'center', label: 'Vehicles', field: ({ vehicles }) => vehicles.model, sortable: true
+    },
+    { name: 'price', label: 'Price', field: ({ price }) => `$${price}`, sortable: true },
+    { name: 'data', label: 'Data', field: 'data', sortable: true },
+    { name: 'profit', label: 'Profit', field: 'profit', sortable: true },
 ]
 
-const rows = [
-    {
-        name: 'GLA250',
-        brand: 'Mercedes',
-        costPrice: 1500.5,
-        extraCost: 1650.0,
-        totalCost: 3150.5,
-        price: 8000.0,
-        profit: 4849.5,
-        date: '2023-02-20',
-    },
-    {
-        name: 'A6',
-        brand: 'Audi',
-        costPrice: 9900.5,
-        extraCost: 1050.0,
-        totalCost: 10950.5,
-        price: 98000.0,
-        profit: 87049.5,
-        date: '2023-02-20',
-    },
-
-]
 </script>

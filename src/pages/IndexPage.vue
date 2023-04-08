@@ -1,8 +1,9 @@
 <template>
     <h1>Home</h1>
-    <h2>{{ user.id }}</h2>
-    <h2>{{ user.email }}</h2>
-    <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+    <h2>Welcome {{ user.firstName }} {{ user.lastName }}</h2>
+    <h2>Your id: {{ user.id }}</h2>
+    <h2>Your email: {{ user.email }}</h2>
+    <h2>Your profit is : R$ {{ user.profitTotal }}</h2>
 </template>
 
 <script setup lang="ts">
