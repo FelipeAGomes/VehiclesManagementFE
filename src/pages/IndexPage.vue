@@ -10,5 +10,5 @@ import { LocalStorage } from 'quasar';
 import { ILoginUser } from 'src/models/user/loginUser.type';
 
 const user = LocalStorage.getItem('user') as ILoginUser;
-console.log(user);
+
 </script>

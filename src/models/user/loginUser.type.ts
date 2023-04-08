@@ -4,6 +4,10 @@ export interface ILoginUser {
     lastName: string,
     email: string,
     vehicles: {
-        // to do : add vehicles properties
+        brand: string,
+        model: string,
+        costPrice: number,
+        totalCost: number,
+        status: number,
     }
 };
