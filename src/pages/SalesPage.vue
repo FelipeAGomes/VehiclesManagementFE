@@ -24,12 +24,10 @@ const sales = LocalStorage.getItem('sales') as ISalesUser[];
 console.log(sales)
 
 const columns: QTableColumn[] = [
-    {
-        name: 'vehicles', align: 'center', label: 'Vehicles', field: ({ vehicles }) => vehicles.model, sortable: true
-    },
-    { name: 'price', label: 'Price', field: ({ price }) => `$${price}`, sortable: true },
-    { name: 'data', label: 'Data', field: 'data', sortable: true },
-    { name: 'profit', label: 'Profit', field: 'profit', sortable: true },
+    { name: 'vehicles', align: 'center', label: 'Vehicle', field: ({ vehicles }) => vehicles.model, sortable: true },
+    { name: 'data', align: 'center', label: 'Data', field: 'data', sortable: true },
+    { name: 'price', align: 'center', label: 'Price', field: ({ price }) => `$${price}`, sortable: true },
+    { name: 'profit', align: 'center', label: 'Profit', field: ({ profit }) => `$${profit}`, sortable: true },
 ]
 
 </script>

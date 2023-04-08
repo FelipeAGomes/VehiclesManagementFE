@@ -28,10 +28,10 @@ const vehicles = ref<IVehiclesUser[]>([]);
 const columns: QTableColumn[] = [
   { name: 'model', align: 'center', label: 'Model', field: 'model', sortable: true },
   { name: 'brand', align: 'center', label: 'Brand', field: 'brand', sortable: true },
-  { name: 'costPrice', label: 'CostPrice', field: 'costPrice', sortable: true },
-  { name: 'totalExtraCost', label: 'Total Extra Cost', field: 'totalExtraCost', sortable: true },
-  { name: 'totalCost', label: 'TotalCost', field: 'totalCost', sortable: true },
-  { name: 'status', label: 'Status', field: 'status', sortable: true },
+  { name: 'costPrice', align: 'center', label: 'CostPrice', field: ({ costPrice }) => `$${costPrice}`, sortable: true },
+  { name: 'totalExtraCost', align: 'center', label: 'Extra Cost', field: ({ totalExtraCost }) => `$${totalExtraCost}`, sortable: true },
+  { name: 'totalCost', align: 'center', label: 'Total Cost', field: ({ totalCost }) => `$${totalCost}`, sortable: true },
+  { name: 'status', align: 'center', label: 'Status', field: 'status', sortable: true },
 
 ]
 
