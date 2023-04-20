@@ -1,6 +1,6 @@
 <template>
     <h4>You have {{ sales.length }} sales</h4>
-    <h4>Your profis it: £{{ user.profitTotal }}</h4>
+    <h4>Your profis is: £{{ user.profitTotal }}</h4>
 </template>
 
 <script setup lang="ts">
