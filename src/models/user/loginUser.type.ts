@@ -4,4 +4,5 @@ export interface ILoginUser {
     lastName: string,
     email: string,
     profitTotal: number
+    password: string
 };
