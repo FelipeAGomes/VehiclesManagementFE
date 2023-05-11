@@ -39,8 +39,10 @@ const { push } = useRouter();
 async function submitForm() {
 
     const { model, brand, costPrice } = state.value.form;
+    const modelU = model.charAt(0).toUpperCase() + model.substring(1);
+    const brandU = brand.charAt(0).toUpperCase() + brand.substring(1);
 
-    const [erro, res] = await NewVehicle.newVehicle(model, brand, costPrice, 0, user);
+    const [erro, res] = await NewVehicle.newVehicle(modelU, brandU, costPrice, 0, user);
 
     if (erro) throw new Error(console.log(erro) + 'Authentication Failure');
     if (res.status === 201) {
