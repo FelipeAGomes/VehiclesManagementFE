@@ -1,8 +1,10 @@
 <template>
   <div class="q-pa-md">
     <q-table title="VEHICLES" :rows="vehicles" :columns="columns">
-
     </q-table>
+    <div class="q-pa-md q-gutter-sm" style="margin-top: 2rem;">
+      <q-btn color="secondary" label="New" to="/app/vehiclesNew" />
+    </div>
   </div>
 </template>
   
