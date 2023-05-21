@@ -3,6 +3,8 @@ export interface ILoginUser {
     firstName: string,
     lastName: string,
     email: string,
-    profitTotal: number
-    password: string
+    profitTotal: number,
+    password: string,
+    vehicles: any,
+    sales: any,
 };

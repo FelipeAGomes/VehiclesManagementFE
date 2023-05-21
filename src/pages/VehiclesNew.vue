@@ -21,6 +21,7 @@ import NewVehicle from 'src/services/vehicles/newVehicle.service';
 import { useRouter } from 'vue-router';
 import { LocalStorage } from 'quasar';
 import { ILoginUser } from 'src/models/user/loginUser.type';
+import LoginService from 'src/services/login/login.service';
 
 const user = LocalStorage.getItem('user') as ILoginUser;
 
@@ -46,10 +47,12 @@ async function submitForm() {
 
     if (erro) throw new Error(console.log(erro) + 'Authentication Failure');
     if (res.status === 201) {
+
+        const userc = await LoginService.loginUser(user.email, user.password);
+        LocalStorage.set('user', userc[1]);
+
         push({ path: '/app/vehicles' })
     }
-
-    console.log(res.status)
 
 }
 
