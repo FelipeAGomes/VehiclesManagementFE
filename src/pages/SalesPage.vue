@@ -1,8 +1,10 @@
 <template>
     <div class="q-pa-md">
         <q-table title="SALES" :rows="sales" :columns="columns" row-key="name">
-
         </q-table>
+        <div class="q-pa-md q-gutter-sm" style="margin-top: 2rem;">
+            <q-btn color="secondary" label="New" to="/app/salesNew" />
+        </div>
     </div>
 </template>
     
@@ -21,7 +23,6 @@ onMounted(async () => {
 });
 
 const sales = LocalStorage.getItem('sales') as ISalesUser[];
-console.log(sales)
 
 const columns: QTableColumn[] = [
     { name: 'vehicles', align: 'center', label: 'Vehicle', field: ({ vehicles }) => vehicles.model, sortable: true },
