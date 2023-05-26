@@ -2,10 +2,10 @@
     <div class="q-pa-md" style="max-width: 400px">
         <h4>New sale</h4>
         <q-form id="form-vehicle" class="q-gutter-md" @submit="submitForm">
-            <q-select filled v-model="state.form.model" :options="state.form.model2" field='model' label="Vehicle"
-                hint="Vehicle " lazy-rules :rules="[val => val && val.length > 0 || 'Please type your vehicle ']" />
+            <q-select filled v-model="state.form.model" map-options emit-value :options="state.options.vehicles"
+                field='model' label="Vehicle" hint="Vehicle " lazy-rules :rules="[requiredRule]" />
             <q-input filled v-model="state.form.costPrice" label="Price" type="number" hint="Vehicle Price" lazy-rules
-                :rules="[val => val && val.length > 0 || 'Please type your vehicle price']" />
+                :rules="[requiredRule]" />
             <div class="q-pa-md q-gutter-sm">
                 <q-btn color="secondary" label="Submit" type="submit" form="form-vehicle" />
             </div>
@@ -20,6 +20,7 @@ import { LocalStorage } from 'quasar';
 import { ILoginUser } from 'src/models/user/loginUser.type';
 import vehiclesService from 'src/services/vehicles/vehicles.service';
 import { IVehiclesUser } from 'src/models/user/vehiclesUser.type';
+import { requiredRule } from 'src/utils/form/rules/requiredRule.utils'
 
 const user = LocalStorage.getItem('user') as ILoginUser;
 
@@ -31,18 +32,29 @@ const user = LocalStorage.getItem('user') as ILoginUser;
 //     vehicles.value = dataVehicles || []
 //     console.log(dataVehicles)
 // })
+
+// const vehicles = ref<IVehiclesUser[]>([]);
+
 const vehicles = user.vehicles
 const model = vehicles.map((c: { model: any; }) => { return c.model })
 console.log(model)
 
 
-interface IState { form: { model: string, model2: any, costPrice: any } };
+interface IState { form: { model: string, model2: any, costPrice: any }, options: { vehicles: any[] } };
 
 const state = ref<IState>({
     form: {
         model: "",
-        model2: model,
+        model2: vehicles,
         costPrice: null
+    },
+    options: {
+        vehicles: user.vehicles.map((vehicle: IVehiclesUser) => {
+            return {
+                label: vehicle.model,
+                value: vehicle.id
+            }
+        })
     }
 });
 

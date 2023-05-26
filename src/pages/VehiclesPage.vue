@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <q-table title="VEHICLES" :rows="vehicles" :columns="columns">
+    <q-table title="VEHICLES" :rows="vehicles" :columns="columns" :rows-per-page-options="[10, 20, 50, 100]">
     </q-table>
     <div class="q-pa-md q-gutter-sm" style="margin-top: 2rem;">
       <q-btn color="secondary" label="New" to="/app/vehiclesNew" />
@@ -9,6 +9,7 @@
 </template>
   
 <script setup lang="ts">
+import { all } from 'axios';
 import { LocalStorage, QTableColumn } from 'quasar';
 import { ILoginUser } from 'src/models/user/loginUser.type';
 import { IVehiclesUser } from 'src/models/user/vehiclesUser.type';
